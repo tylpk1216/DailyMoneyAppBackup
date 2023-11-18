@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.bottleworks.commons.util.CalendarHelper;
 import com.bottleworks.commons.util.GUIs;
+import com.bottleworks.commons.util.Logger;
 import com.bottleworks.dailymoney.context.ContextsActivity;
 import com.bottleworks.dailymoney.core.R;
 import com.bottleworks.dailymoney.data.Account;
@@ -521,8 +522,16 @@ public class BalanceActivity extends ContextsActivity implements OnClickListener
         Intent intent = null;
         intent = new Intent(this,AccountDetailListActivity.class);
         if(currentStartDate !=null){
+            Logger.d("MK BalanceActivity doDatailList: currentStartDate != null"); 
+            intent.putExtra(AccountDetailListActivity.INTENT_START,currentStartDate);
+        } else {
+            Logger.d("MK BalanceActivity doDatailList: currentStartDate == null"); 
+            final CalendarHelper cal = getContexts().getCalendarHelper();
+            currentDate = new Date();
+            currentStartDate = cal.yearStartDate(currentDate);
             intent.putExtra(AccountDetailListActivity.INTENT_START,currentStartDate);
         }
+        
         if(currentEndDate !=null){
             intent.putExtra(AccountDetailListActivity.INTENT_END,currentEndDate);
         }            

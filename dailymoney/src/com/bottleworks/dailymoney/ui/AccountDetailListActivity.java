@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bottleworks.commons.util.GUIs;
+import com.bottleworks.commons.util.Logger;
 import com.bottleworks.dailymoney.context.ContextsActivity;
 import com.bottleworks.dailymoney.core.R;
 import com.bottleworks.dailymoney.data.Account;
@@ -81,7 +82,9 @@ public class AccountDetailListActivity extends ContextsActivity {
         DateFormat format = getContexts().getDateFormat();
         String fromStr = startDate==null?"":format.format(startDate);
         String toStr = endDate==null?"":format.format(endDate);
-
+        
+        Logger.d("MK AccountDetailListActivity initialIntent: target " + target + ", startDate " + fromStr + ", endDate, " + toStr);
+        
         info = info + i18n.string(R.string.label_accdetlist_dateinfo,fromStr,toStr); 
         
         if(target instanceof AccountType){
