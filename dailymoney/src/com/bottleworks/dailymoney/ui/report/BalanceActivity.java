@@ -519,6 +519,8 @@ public class BalanceActivity extends ContextsActivity implements OnClickListener
             return;
         }
         
+        Logger.d("MK BalanceActivity currentDate " + currentDate + ", currentEndDate, " + currentEndDate);
+
         Intent intent = null;
         intent = new Intent(this,AccountDetailListActivity.class);
         if(currentStartDate !=null){
@@ -527,9 +529,10 @@ public class BalanceActivity extends ContextsActivity implements OnClickListener
         } else {
             Logger.d("MK BalanceActivity doDatailList: currentStartDate == null"); 
             final CalendarHelper cal = getContexts().getCalendarHelper();
-            currentDate = new Date();
             currentStartDate = cal.yearStartDate(currentDate);
             intent.putExtra(AccountDetailListActivity.INTENT_START,currentStartDate);
+            // tylpk 2024/01/13, force to enter here. We can get the new currentStartDate when we click Prev() or Next().
+            currentStartDate = null;
         }
         
         if(currentEndDate !=null){
